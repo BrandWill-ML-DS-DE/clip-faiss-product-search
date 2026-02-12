@@ -1,17 +1,25 @@
-import streamlit as st
-import requests
+# 🛍️ Semantic Product Search Engine
 
-st.set_page_config(page_title="AI Fashion Search", layout="wide")
-st.title("🛍️ Semantic Product Search")
+A high-performance, multi-modal search engine built with **CLIP** and **FAISS (HNSW)**. This project allows users to search for physical products using natural language descriptions (e.g., "blue running shoes") instead of just keywords.
 
-query = st.text_input("Describe what you want:", "blue summer dress")
 
-if st.button("Search"):
-    res = requests.get(f"http://localhost:8000/search?query={query}").json()
-    
-    st.sidebar.metric("Search Latency", f"{res['latency_ms']} ms")
-    
-    cols = st.columns(3)
-    for i, img_path in enumerate(res['results']):
-        with cols[i % 3]:
-            st.image(img_path, use_container_width=True)
+
+## 🚀 Technical Highlights
+* **Model:** OpenAI's CLIP (`clip-ViT-B-32`) used for multi-modal embeddings.
+* **Vector Database:** FAISS (Facebook AI Similarity Search) using an **HNSW (Hierarchical Navigable Small World)** index for $O(\log N)$ search complexity.
+* **Backend:** FastAPI for high-concurrency request handling.
+* **Frontend:** Streamlit for a clean, interactive user experience.
+
+## 🏗️ System Architecture
+1.  **Ingestion:** Images are processed through a Vision Transformer to create 512-dimension vectors.
+2.  **Indexing:** Vectors are inserted into a proximity graph (HNSW) to allow for sub-20ms retrieval.
+3.  **Inference:** Natural language queries are encoded into the same vector space, and a "Nearest Neighbor" search finds the most relevant images.
+
+
+
+## 🛠️ Installation & Usage
+1. `pip install -r requirements.txt`
+2. `python setup_data.py`  # Downloads professional dataset
+3. `python build_index.py` # Generates vector embeddings
+4. `uvicorn api:app`       # Starts the backend
+5. `streamlit run app.py`  # Starts the UI
