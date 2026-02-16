@@ -27,7 +27,7 @@ for file in tqdm(os.listdir(image_folder)):
 embeddings = np.array(embeddings).astype("float32")
 faiss.normalize_L2(embeddings)
 
-# 2. Build HNSW Index (The Pro Way)
+# 2. Build HNSW Index
 dim = embeddings.shape[1]
 index = faiss.IndexHNSWFlat(dim, 32) # 32 connections per node
 index.add(embeddings)
