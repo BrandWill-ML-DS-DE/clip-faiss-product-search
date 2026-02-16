@@ -6,8 +6,6 @@ from tqdm import tqdm
 # Create structure
 os.makedirs("data/images", exist_ok=True)
 
-# We'll use a curated sample of product images
-# If you have your own CSV/Images, skip this.
 print("📥 Downloading sample product metadata...")
 csv_url = "https://raw.githubusercontent.com/ardamavi/Fashion-Dataset/master/fashion.csv"
 img_base_url = "https://raw.githubusercontent.com/ardamavi/Fashion-Dataset/master/images/"
