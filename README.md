@@ -57,4 +57,4 @@ The `setup_data.py` script includes robust error handling and stream-based downl
 ```bash
 git clone [https://github.com/your-username/multimodal-search.git](https://github.com/your-username/multimodal-search.git)
 cd multimodal-search
-pip install -r requirements.txt```
+pip install -r requirements.txt
