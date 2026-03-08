@@ -58,3 +58,37 @@ The `setup_data.py` script includes robust error handling and stream-based downl
 git clone [https://github.com/your-username/multimodal-search.git](https://github.com/your-username/multimodal-search.git)
 cd multimodal-search
 pip install -r requirements.txt
+```
+### 2. Ingest Data & Build Index
+
+```bash
+# Downloads dataset and generates embeddings
+python setup_data.py
+# Constructs the HNSW index
+python build_index.py
+```
+### 3. Launch the Stack
+
+```bash
+# Start the FastAPI backend
+uvicorn api:app --port 8000 &
+# Start the Streamlit frontend
+streamlit run app.py
+```
+
+---
+
+## 📊 Results
+
+| Metric | Value |
+|--------|-------|
+| Retrieval Speed | X |
+   
+---
+
+## 📈 Roadmap & Scaling
+
+* **[ ] Distributed FAISS:** Transition to a distributed index for billion-scale datasets.
+* **[ ] Quantization (IVFPQ):** Implement Product Quantization to reduce the memory footprint by 4x.
+* **[ ] Hybrid Search:** Combine semantic results with traditional BM25 keyword filtering for "brand-specific" or exact-match queries.
+
